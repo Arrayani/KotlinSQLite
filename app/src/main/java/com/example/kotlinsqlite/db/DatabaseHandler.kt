@@ -15,7 +15,8 @@ import java.util.*
  * Email: biruprinting@gmail.com
 
  */
-class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DatabaseHandler.DB_NAME, null, DatabaseHandler.DB_VERSION) {
+class DatabaseHandler(context: Context)
+    : SQLiteOpenHelper(context, DatabaseHandler.DB_NAME, null, DatabaseHandler.DB_VERSION) {
     companion object {
         private val DB_VERSION = 1
         private val DB_NAME = "MyTasks"
