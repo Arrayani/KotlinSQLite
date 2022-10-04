@@ -25,6 +25,8 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DatabaseHand
         private val DESC = "Desc"
         private val COMPLETED = "Completed"
     }
+    //dibagian $DESC TEXt ada peringatan, tapi kok tetap bisa berjalan ini aplikasi
+    // ini sepertinya sebuag bug
     override fun onCreate(db: SQLiteDatabase) {
         val CREATE_TABLE = "CREATE TABLE $TABLE_NAME ($ID INTEGER PRIMARY KEY, $NAME TEXT, $DESC TEXT, $COMPLETED TEXT);"
         db.execSQL(CREATE_TABLE)
@@ -38,14 +40,14 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DatabaseHand
 
     fun addTask(tasks: Tasks): Boolean {
         val db = this.writableDatabase
-        val values = ContentValues()
+        val values = ContentValues()  // ini mirip hash map di inserting data ke firebase
         values.put(NAME, tasks.name)
         values.put(DESC, tasks.desc)
         values.put(COMPLETED, tasks.completed)
         val _success = db.insert(TABLE_NAME, null, values)
-        db.close()
+        db.close()  // ada rules harus close koneksi, setelah melakukan transaksi di database
         Log.v("InsertedId", "$_success")
-        return (Integer.parseInt("$_success") != -1)
+        return (Integer.parseInt("$_success") != -1) //jika sukses atau true maka nilai value bukan -1
     }
 
     fun getTask(_id: Int): Tasks {
