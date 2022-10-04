@@ -60,15 +60,15 @@ class AddOrEditActivity : AppCompatActivity() {
         btn_delete.setOnClickListener {
             val dialog = AlertDialog.Builder(this).setTitle("Info")
                 .setMessage("Click 'YES' Delete the Task.")
-                .setPositiveButton("YES", { dialog, i ->
+                .setPositiveButton("YES") { dialog, i ->
                     val success = dbHandler?.deleteTask(intent.getIntExtra("Id", 0)) as Boolean
                     if (success)
                         finish()
                     dialog.dismiss()
-                })
-                .setNegativeButton("NO", { dialog, i ->
+                }
+                .setNegativeButton("NO") { dialog, i ->
                     dialog.dismiss()
-                })
+                }
             dialog.show()
         }
     }
